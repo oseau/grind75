@@ -10,7 +10,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.techinterviewhandbook.org/grind75"],
+      "matches": ["https://www.techinterviewhandbook.org/grind75*"],
       "js": ["contentScript.js"],
       "run_at": "document_end"
     }

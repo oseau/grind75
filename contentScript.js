@@ -1,9 +1,13 @@
-const action = ((start = 0) => {
-  const length = 75
+const action = async (start = 0) => {
+  const length = parseInt(/\/.*?(\d+)/.exec([...document.querySelectorAll("h3")].find(el => el.textContent.includes("Completed")).textContent)[1])
   let idx = start
   const getAllLink = () => document.querySelectorAll("a.text-indigo-600")
   if (getAllLink().length != length) {
     [...document.querySelectorAll("button[aria-label*=' Week ']")].map((b) => b.click())
+    await new Promise(r => setTimeout(r, 2000));
+    [...document.querySelectorAll("button[aria-label*=' Week ']")].map((b) => b.click())
+    await new Promise(r => setTimeout(r, 2000));
+    [...document.querySelectorAll("button[aria-label^='Expand Week ']")].map((b) => b.click())
   }
   const select = () => {
     const selection = window.getSelection()
@@ -35,20 +39,21 @@ const action = ((start = 0) => {
     prev,
     open,
   }
-})()
+}
 
-const onKeyboard = () => {
+const onKeyboard = async () => {
+  const { next, prev, open } = await action()
   document.addEventListener('keydown', (event) => {
     if (event.key === "j") {
-      action.next()
+      next()
     } else if (event.key === "k") {
-      action.prev()
+      prev()
     } else if (event.key === "o") {
-      action.open()
+      open()
     }
   })
 }
 
-(() => {
-  onKeyboard()
+(async () => {
+  await onKeyboard()
 })()
