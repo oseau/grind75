@@ -1,6 +1,6 @@
 # Grind75 shortcuts
 
-A chrome extension that add keyboard shortcuts to grind75 site.
+A chrome extension that add keyboard shortcuts to [grind75](https://www.techinterviewhandbook.org/grind75) site.
 
 | Key | Action                                       |
 | --- | -------------------------------------------- |
