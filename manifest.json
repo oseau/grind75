@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Grind75 shortcuts",
+  "version": "1.0",
+  "description": "keyboard actions for grind75",
+  "action": {
+    "default_icon": {
+      "48": "logo.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.techinterviewhandbook.org/grind75"],
+      "js": ["contentScript.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "48": "logo.png"
+  }
+}
