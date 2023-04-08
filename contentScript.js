@@ -1,32 +1,32 @@
 const action = ((start = 0) => {
-  const length = 75;
-  let idx = start;
+  const length = 75
+  let idx = start
   const getAllLink = () => document.querySelectorAll("a.text-indigo-600")
   if (getAllLink().length != length) {
-    [...document.querySelectorAll("button[aria-label*=' Week ']")].map((b) => b.click());
+    [...document.querySelectorAll("button[aria-label*=' Week ']")].map((b) => b.click())
   }
   const select = () => {
-    const selection = window.getSelection();
-    const range = document.createRange();
-    range.selectNodeContents(getAllLink()[idx % length]);
-    selection.removeAllRanges();
-    selection.addRange(range);
-    getAllLink()[idx % length].scrollIntoView({
+    const selection = window.getSelection()
+    const range = document.createRange()
+    range.selectNodeContents(getAllLink()[idx])
+    selection.removeAllRanges()
+    selection.addRange(range)
+    getAllLink()[idx].scrollIntoView({
       behavior: "smooth",
       block: "center",
       inline: "nearest",
-    });
-  };
+    })
+  }
   const open = () => {
-    window.open(getAllLink()[idx % length].href.replace("leetcode.com/", "leetcode.cn/"), "_blank").focus();
+    window.open(getAllLink()[idx].href.replace("leetcode.com/", "leetcode.cn/"), "_blank").focus()
     next()
-  };
+  }
   const prev = () => {
-    idx--;
+    idx = (idx - 1 + length) % length
     select()
   }
   const next = () => {
-    idx++;
+    idx = (idx + 1) % length
     select()
   }
   select()
@@ -34,8 +34,8 @@ const action = ((start = 0) => {
     next,
     prev,
     open,
-  };
-})();
+  }
+})()
 
 const onKeyboard = () => {
   document.addEventListener('keydown', (event) => {
@@ -46,7 +46,7 @@ const onKeyboard = () => {
     } else if (event.key === "o") {
       action.open()
     }
-  });
+  })
 }
 
 (() => {
