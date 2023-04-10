@@ -1,9 +1,26 @@
 const $$ = document.querySelectorAll.bind(document)
 
-const action = async (start = 0) => {
+const getStorage = async (key) => new Promise((resolve, reject) => {
+  try {
+    chrome.storage.local.get(key, (value) => resolve(value[key]))
+  } catch (ex) {
+    reject(ex)
+  }
+})
+
+
+const setStorage = async (obj) => new Promise((resolve, reject) => {
+  try {
+    chrome.storage.local.set(obj, () => resolve())
+  } catch (ex) {
+    reject(ex)
+  }
+})
+
+const action = async () => {
   const length = parseInt(/\/.*?(\d+)/.exec([...$$("h3")]
     .find(el => el.textContent.includes("Completed")).textContent)[1])
-  let idx = start
+  let idx = await getStorage('idx') ?? 0
   const getAllLink = () => $$("a.text-indigo-600")
   if (getAllLink().length != length) {
     [...$$("button[aria-label*=' Week ']")].map((b) => b.click())
@@ -30,12 +47,15 @@ const action = async (start = 0) => {
   }
   const prev = () => {
     idx = (idx - 1 + length) % length
+    saveIdx()
     select()
   }
   const next = () => {
     idx = (idx + 1) % length
+    saveIdx()
     select()
   }
+  const saveIdx = async () => await setStorage({ idx })
   select()
   return {
     next,
