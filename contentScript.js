@@ -70,8 +70,8 @@ const action = async () => {
 };
 
 const onKeyboard = async () => {
-  const { next, prev, open } = await action();
-  document.addEventListener("keydown", (event) => {
+  document.addEventListener("keydown", async (event) => {
+    const { next, prev, open } = await action();
     if (event.key === "j") {
       next();
     } else if (event.key === "k") {

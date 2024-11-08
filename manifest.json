@@ -8,17 +8,11 @@
       "48": "logo.png"
     }
   },
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "content_scripts": [
     {
-      "matches": [
-        "https://www.techinterviewhandbook.org/grind75*"
-      ],
-      "js": [
-        "contentScript.js"
-      ],
+      "matches": ["https://www.techinterviewhandbook.org/grind75*"],
+      "js": ["contentScript.js"],
       "run_at": "document_end"
     }
   ],
